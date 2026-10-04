@@ -1,0 +1,20 @@
+    1  sudo dnf update
+    2  ping -c 4 8.8.8.8 > ping.out
+    3  ping -c 4 8.8.8.8 
+    4  getenforce 
+    5  sudo dnf update
+    6  sudo dnf install -y nginx libcap-ng-utils
+    7  rpm -q nginx libcap-ng-utils
+    8  cd /tmp
+    9  sudo dnf download tcpdump
+   10  sudo rpm -ivh tcpdump-*.rpm
+   11  tcpdump --version
+   12  ..
+   13  cd ..
+   14  sudo dnf history > dnf.out
+   15  cd /home
+   16  cd ..
+   17  ls
+   18  cd /tmp
+   19  sudo dnf history > dnf.out
+   20  history > ~/history.out
