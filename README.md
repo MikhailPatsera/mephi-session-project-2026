@@ -1,6 +1,7 @@
 # mephi-session-project-2026 
 mephi-screenshot.png	Визуальное подтверждение; 
-history.out	          Выполненные команды; 
+history1.out	        Выполненные команды; 
+history2.out	        Выполненные команды; 
 ping.out	            Работоспособность сети; 
 dnf.out	              Управление пакетами; 
 dnf1.out	            Управление пакетами; 
