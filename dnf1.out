@@ -1,0 +1,7 @@
+Иденти | Командная строка                                                                                      | Дата и время     | Действия       | Изменен
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+     5 | install -y nginx libcap-ng-utils                                                                      | 2026-10-03 19:49 | Install        |    5   
+     4 | update                                                                                                | 2026-10-03 19:26 | I, O, U        |  283 E<
+     3 | autoremove -y --setopt=metadata_expire=-1                                                             | 2026-10-03 18:44 | Removed        |    2 ><
+     2 | remove -y --setopt=metadata_expire=-1 spice-vdagent open-vm-tools qemu-guest-agent                    | 2026-10-03 18:42 | Removed        |    3 >E
+     1 |                                                                                                       | 2026-10-03 18:34 | Install        | 2174 EE

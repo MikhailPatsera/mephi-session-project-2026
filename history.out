@@ -1,0 +1,80 @@
+    1  lsblk
+    2  sudo parted -s /dev/sdb mklabel gpt
+    3  sudo parted -s /dev/sdb mkpart primary ext4 0% 100%
+    4  sudo partprobe /dev/sdb
+    5  lsblk /dev/sdb
+    6  sudo mkfs.ext4 -L MEPHI_WEB /dev/sdb1
+    7  sudo blkid /dev/sdb1
+    8  sudo mkdir -p /mephi-web
+    9  sudo nano /etc/fstab
+   10  echo 'LABEL=MEPHI_WEB  /mephi-web  ext4  defaults  0  0' | sudo tee -a /etc/fstab
+   11  sudo nano /etc/fstab
+   12  sudo mount -a
+   13  sudo systemctl daemon-reload
+   14  sudo mount -a
+   15  findmnt /mephi-web
+   16  df -h /mephi-web
+   17  sudo systemctl start nginx
+   18  sudo systemctl enable nginx
+   19  systemctl status nginx
+   20  sudo journalctl -b -u nginx > journalctl.out
+   21  sudo mkdir -p /data/mephi-2026
+   22  sudo groupadd -g 4444 curators
+   23  sudo useradd -u 5501 user1
+   24  sudo useradd -u 5502 user2
+   25  sudo useradd -u 5503 user3
+   26  sudo useradd curator1
+   27  sudo useradd curator2
+   28  sudo usermod -aG curators curator1
+   29  sudo usermod -aG curators curator2
+   30  sudo chown root:root /data/mephi-2026
+   31  sudo chmod 750 /data/mephi-2026
+   32  sudo setfacl -d -m u::rwx,g:curators:r-x,o::--- /data/mephi-2026
+   33  sudo setfacl -d -m m::rwx /data/mephi-2026
+   34  sudo setfacl -m u::rwx,g:curators:r-x,o::--- /data/mephi-2026
+   35  sudo getfacl /data/mephi-2026
+   36  rpm -q tcpdump
+   37  sudo chmod u-s /usr/sbin/tcpdump
+   38  sudo setcap cap_net_raw,cap_net_admin+eip /usr/sbin/tcpdump
+   39  getcap /usr/sbin/tcpdump
+   40  sudo -u user1 tcpdump --version
+   41  sudo -u user1 tcpdump -c 1 -i lo
+   42  getenforce 
+   43  sudo dnf install -y policycoreutils-python-utils
+   44  sudo semanage fcontext -a -t httpd_sys_content_t "/mephi-web(/.*)?"
+   45  sudo restorecon -Rv /mephi-web
+   46  ls -Z /mephi-web
+   47  sudo nano /etc/nginx/nginx.conf
+   48  sudo nano /etc/nginx/conf.d/mephi-web.conf
+   49  sudo nginx -t
+   50  sudo systemctl reload nginx
+   51  echo "MEPHI GIS" | sudo tee /mephi-web/index.html
+   52  sudo restorecon -Rv /mephi-web
+   53  curl http://localhost/
+   54  curl http://mephi-web.local/
+   55  echo "127.0.0.1  mephi-web.local" | sudo tee -a /etc/hosts
+   56  cat /etc/hosts
+   57  getent hosts mephi-web.local
+   58  curl http://mephi-web.local/
+   59  sudo nano /etc/security/access.conf
+   60  sudo authselect create-profile restrict-curators -b sssd
+   61  sudo nano /etc/authselect/custom/restrict-curators/system-auth
+   62  sudo nano /etc/authselect/custom/restrict-curators/password-auth
+   63  sudo authselect select custom/restrict-curators
+   64  sudo chage -M 90 user1 user2 user3 curator1 curator2
+   65  sudo chage -M 90 user1
+   66  sudo chage -M 90 user2
+   67  sudo chage -M 90 user3
+   68  sudo chage -M 90 curator1
+   69  sudo chage -M 90 curator2
+   70  sudo nano /etc/security/pwquality.conf
+   71  sudo chage -l user1
+   72  sudo passwd user1
+   73  echo "Hello from Student: 372367" | sudo tee /mephi-web/index.html
+   74  sudo restorecon -Rv /mephi-web
+   75  ls -Z /mephi-web/index.html
+   76  cat /mephi-web/index.html
+   77  systemctl status nginx
+   78  curl http://localhost/
+   79  curl http://mephi-web.local/
+   80  history > ~/history.out
